@@ -115,6 +115,55 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* 1.5 HIGH-RES HIGHLIGHTS */}
+      <section className="py-24 bg-background relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-8 mb-12 flex justify-between items-end">
+          <div>
+            <span className="text-[10px] font-mono text-accent tracking-[0.5em] uppercase block mb-4">Elite_High_Res</span>
+            <h3 className="text-3xl md:text-5xl font-syne font-black uppercase tracking-tighter">Sistemas <span className="text-accent italic">Nucleares</span></h3>
+          </div>
+          <div className="hidden md:flex items-center gap-4 text-[10px] font-mono text-neutral/40 uppercase tracking-widest">
+            <span className="w-8 h-px bg-white/10" />
+            Clique para inspecionar em 4K
+          </div>
+        </div>
+
+        <div className="flex gap-8 overflow-x-auto px-8 pb-12 hide-scrollbar snap-x snap-mandatory">
+          {[
+            { img: devSink, title: "Núcleo de Preparo" },
+            { img: imgIslandElite, title: "Ilha de Comando" },
+            { img: imgGrillElite, title: "Estação Grill" }
+          ].map((item, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.2 }}
+              className="min-w-[85vw] md:min-w-[40vw] aspect-[16/10] relative group overflow-hidden border border-white/5 cursor-zoom-in snap-center"
+              onClick={() => setSelectedImage(item.img)}
+            >
+              <Image 
+                src={item.img} 
+                alt={item.title} 
+                fill 
+                className="object-cover transition-all duration-1000 group-hover:scale-110" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 transition-opacity group-hover:opacity-40" />
+              <div className="absolute bottom-8 left-8">
+                <h4 className="text-xl md:text-2xl font-syne font-bold uppercase tracking-tighter text-white">{item.title}</h4>
+                <div className="mt-2 flex items-center gap-3">
+                  <div className="w-6 h-px bg-accent" />
+                  <span className="text-[10px] font-mono text-accent uppercase tracking-widest">Ultra_Res_4K</span>
+                </div>
+              </div>
+              <div className="absolute top-8 right-8 p-4 bg-black/80 border border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <Maximize2 className="w-5 h-5 text-white" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* 2. GALLERY */}
       <section id="projetos" className="py-48 px-8 max-w-7xl mx-auto">
         <div className="mb-24 space-y-4">
@@ -260,18 +309,6 @@ export default function Home() {
               exit={{ scale: 0.9, opacity: 0 }}
               className="relative w-full h-full flex items-center justify-center"
             >
-              <nav className="relative z-10 flex flex-col items-center gap-8">
-                {[
-                  { name: 'Home', href: '#home' },
-                  { name: 'Projetos', href: '#projetos' },
-                  { name: 'Protocolo', href: '#protocolo' },
-                  { name: 'Contato', href: 'https://wa.me/5511978546562' }
-                ].map((item, i) => (
-                  <a key={i} href={item.href} className="text-white text-2xl font-syne font-bold uppercase hover:text-accent transition-colors">
-                    {item.name}
-                  </a>
-                ))}
-              </nav>
               <Image 
                 src={selectedImage} 
                 alt="High Resolution View" 
