@@ -116,7 +116,7 @@ export default function Home() {
       </section>
 
       {/* 2. GALLERY */}
-      <section id="experiencia" className="py-48 px-8 max-w-7xl mx-auto">
+      <section id="projetos" className="py-48 px-8 max-w-7xl mx-auto">
         <div className="mb-24 space-y-4">
           <span className="text-[10px] font-mono text-accent tracking-[0.5em] uppercase">Visual_Inventory</span>
           <h2 className="text-5xl md:text-7xl lg:text-[4vw] xl:text-8xl font-syne font-black uppercase tracking-tighter">Sistemas de <span className="text-accent italic">Elite</span></h2>
@@ -260,6 +260,18 @@ export default function Home() {
               exit={{ scale: 0.9, opacity: 0 }}
               className="relative w-full h-full flex items-center justify-center"
             >
+              <nav className="relative z-10 flex flex-col items-center gap-8">
+                {[
+                  { name: 'Home', href: '#home' },
+                  { name: 'Projetos', href: '#projetos' },
+                  { name: 'Protocolo', href: '#protocolo' },
+                  { name: 'Contato', href: 'https://wa.me/5511978546562' }
+                ].map((item, i) => (
+                  <a key={i} href={item.href} className="text-white text-2xl font-syne font-bold uppercase hover:text-accent transition-colors">
+                    {item.name}
+                  </a>
+                ))}
+              </nav>
               <Image 
                 src={selectedImage} 
                 alt="High Resolution View" 

@@ -68,7 +68,7 @@ export function Header() {
             <nav className="relative z-10 flex flex-col items-center gap-8">
               {[
                 { name: 'Home', href: '#home' },
-                { name: 'Experiência', href: '#experiencia' },
+                { name: 'Projetos', href: '#projetos' },
                 { name: 'Protocolo', href: '#protocolo' },
                 { name: 'Contato', href: 'https://wa.me/5511978546562' }
               ].map((item, i) => (
