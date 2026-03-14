@@ -66,17 +66,23 @@ export function Header() {
             <div className="bunker-grid absolute inset-0 opacity-10 pointer-events-none" />
             
             <nav className="relative z-10 flex flex-col items-center gap-8">
-              {['Home', 'Experiência', 'Protocolo', 'Projetos', 'Contato'].map((item, i) => (
+              {[
+                { name: 'Home', href: '#home' },
+                { name: 'Experiência', href: '#experiencia' },
+                { name: 'Protocolo', href: '#protocolo' },
+                { name: 'Contato', href: 'https://wa.me/5511978546562' }
+              ].map((item, i) => (
                 <motion.a
-                  key={item}
+                  key={item.name}
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + i * 0.1 }}
-                  href="#"
+                  href={item.href}
+                  target={item.name === 'Contato' ? '_blank' : undefined}
                   onClick={() => setIsOpen(false)}
                   className="text-3xl md:text-8xl font-syne font-black uppercase tracking-tighter hover:text-accent transition-colors"
                 >
-                  {item}
+                  {item.name}
                 </motion.a>
               ))}
             </nav>

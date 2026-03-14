@@ -55,7 +55,7 @@ export default function Home() {
       <BottomDock />
 
       {/* 1. HERO SECTION */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div 
             key={currentSlide}
@@ -116,7 +116,7 @@ export default function Home() {
       </section>
 
       {/* 2. GALLERY */}
-      <section className="py-48 px-8 max-w-7xl mx-auto">
+      <section id="experiencia" className="py-48 px-8 max-w-7xl mx-auto">
         <div className="mb-24 space-y-4">
           <span className="text-[10px] font-mono text-accent tracking-[0.5em] uppercase">Visual_Inventory</span>
           <h2 className="text-5xl md:text-7xl lg:text-[4vw] xl:text-8xl font-syne font-black uppercase tracking-tighter">Sistemas de <span className="text-accent italic">Elite</span></h2>
@@ -154,7 +154,7 @@ export default function Home() {
       </section>
 
       {/* 3. NARRATIVE */}
-      <section className="py-64 bg-secondary/30 relative overflow-hidden border-t border-white/5">
+      <section id="protocolo" className="py-64 bg-secondary/30 relative overflow-hidden border-t border-white/5">
         <div className="bunker-grid absolute inset-0 opacity-5" />
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-32 items-center relative">
           
