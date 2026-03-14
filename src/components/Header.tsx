@@ -10,7 +10,7 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-[100] p-6 flex justify-between items-center transition-all duration-500 backdrop-blur-md">
+      <header className="fixed top-0 left-0 w-full z-[100] p-4 md:p-6 flex justify-between items-center transition-all duration-500 backdrop-blur-md">
         {/* Aesthetic Blur Line */}
         <div className="absolute top-0 left-0 w-full h-[1px] bg-white/10" />
         
@@ -24,11 +24,11 @@ export function Header() {
             </motion.div>
             <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
-          <div className="hidden sm:block">
-            <h1 className="text-lg font-syne font-bold tracking-tighter uppercase leading-none">
+          <div className="">
+            <h1 className="text-sm md:text-lg font-syne font-bold tracking-tighter uppercase leading-none">
               Kitchen <span className="text-accent font-black">Bunker</span>
             </h1>
-            <p className="text-[10px] text-accent/60 font-mono tracking-widest uppercase">
+            <p className="text-[8px] md:text-[10px] text-accent/60 font-mono tracking-widest uppercase">
               Divine V4 // Institutional
             </p>
           </div>
@@ -36,20 +36,20 @@ export function Header() {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="group relative w-12 h-12 flex flex-col justify-center items-center gap-1.5 focus:outline-none bg-secondary/80 backdrop-blur-md border border-white/5"
+          className="group relative w-10 h-10 md:w-12 md:h-12 flex flex-col justify-center items-center gap-1.5 focus:outline-none bg-secondary/80 backdrop-blur-md border border-white/5"
           aria-label="Menu"
         >
           <span className={cn(
             "h-[2px] bg-foreground transition-all duration-300",
-            isOpen ? "w-8 rotate-45 translate-y-[8px]" : "w-8"
+            isOpen ? "w-6 md:w-8 rotate-45 translate-y-[8px]" : "w-6 md:w-8"
           )} />
           <span className={cn(
             "h-[2px] bg-foreground transition-all duration-300",
-            isOpen ? "opacity-0" : "w-8"
+            isOpen ? "opacity-0" : "w-6 md:w-8"
           )} />
           <span className={cn(
             "h-[2px] bg-foreground transition-all duration-300",
-            isOpen ? "w-8 -rotate-45 -translate-y-[8px]" : "w-5 ml-auto mr-0"
+            isOpen ? "w-6 md:w-8 -rotate-45 -translate-y-[8px]" : "w-4 md:w-5 ml-auto mr-0"
           )} />
         </button>
       </header>

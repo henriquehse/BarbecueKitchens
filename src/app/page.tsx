@@ -84,11 +84,11 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="max-w-5xl md:max-w-6xl"
           >
-            <h2 className="text-[12vw] sm:text-7xl md:text-8xl lg:text-[7.5vw] xl:text-[7rem] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-12">
+            <h2 className="text-[10vw] sm:text-7xl md:text-8xl lg:text-[7.5vw] xl:text-[7rem] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12">
               Arquitetura <br/> de <span className="text-accent italic">Integração</span>
             </h2>
             <div className="flex flex-col md:flex-row gap-12 items-start md:items-center">
-              <p className="max-w-md text-neutral/60 font-mono text-xs md:text-sm leading-relaxed border-l border-accent/30 pl-6">
+              <p className="max-w-md text-neutral/60 font-mono text-[10px] md:text-xs lg:text-sm leading-relaxed border-l border-accent/30 pl-6">
                 Protocolo de design industrial fundindo funcionalidade de alta performance com estética minimalista de ambientes de elite.
               </p>
               <div className="flex gap-4 p-5 bg-secondary/80 backdrop-blur-xl border border-white/5 font-mono text-[10px]">
@@ -168,13 +168,13 @@ export default function Home() {
               
               <div className="relative group">
                 {/* Layered Text Idea: Background Solid */}
-                <h2 className="text-6xl md:text-8xl xl:text-[7.5rem] font-syne font-black uppercase tracking-tighter text-white leading-[0.85] relative z-10">
-                  Protocolo <br /> de <span className="text-accent italic text-5xl md:text-7xl xl:text-[6rem] align-top ml-2">Uso</span>
+                <h2 className="text-5xl sm:text-6xl md:text-8xl xl:text-[7.5rem] font-syne font-black uppercase tracking-tighter text-white leading-[0.85] relative z-10">
+                  Protocolo <br /> de <span className="text-accent italic text-4xl sm:text-5xl md:text-7xl xl:text-[6rem] align-top ml-2">Uso</span>
                 </h2>
                 
                 {/* Foreground Outline (for overlap feel) */}
-                <h2 className="absolute top-0 left-0 text-6xl md:text-8xl xl:text-[7.5rem] font-syne font-black uppercase tracking-tighter leading-[0.85] pointer-events-none z-40 text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)]">
-                  Protocolo <br /> de <span className="italic text-5xl md:text-7xl xl:text-[6rem] align-top ml-2">Uso</span>
+                <h2 className="absolute top-0 left-0 text-5xl sm:text-6xl md:text-8xl xl:text-[7.5rem] font-syne font-black uppercase tracking-tighter leading-[0.85] pointer-events-none z-40 text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)]">
+                  Protocolo <br /> de <span className="italic text-4xl sm:text-5xl md:text-7xl xl:text-[6rem] align-top ml-2">Uso</span>
                 </h2>
               </div>
             </div>
@@ -208,33 +208,33 @@ export default function Home() {
                 whileHover={{ x: 10 }}
                 className="inline-flex items-center gap-6 group"
               >
-                <div className="bg-accent text-black px-12 py-6 font-syne font-black uppercase tracking-tighter text-xl">
+                <div className="bg-accent text-black px-8 md:px-12 py-4 md:py-6 font-syne font-black uppercase tracking-tighter text-lg md:text-xl">
                   Iniciar Projeto
                 </div>
-                <div className="w-16 h-16 border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all duration-500">
-                  <MessageCircle className="w-6 h-6 text-accent" />
+                <div className="w-12 h-12 md:w-16 md:h-16 border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all duration-500">
+                  <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-accent" />
                 </div>
               </motion.a>
             </div>
           </div>
           
-          {/* IMAGE LAYER (MIDDLE) */}
+          {/* IMAGE LAYER */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.5 }}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] h-[120%] lg:h-[80%] z-20 pointer-events-none lg:pointer-events-auto"
+            className="lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 w-full lg:w-[60%] aspect-video lg:h-[80%] z-20 pointer-events-auto mt-12 lg:mt-0"
           >
-             <div className="relative w-full h-full overflow-hidden border-l border-white/5 shadow-2xl">
+             <div className="relative w-full h-full overflow-hidden border-t lg:border-t-0 lg:border-l border-white/5 shadow-2xl">
                <Image 
                  src={imgIslandElite} 
                  alt="Detailed View // Elite Island" 
                  fill 
-                 className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 cursor-zoom-in" 
+                 className="object-cover grayscale hover:grayscale-0 hover:scale-105 transition-all duration-1000 cursor-zoom-in" 
                  onClick={() => setSelectedImage(imgIslandElite)}
                />
-               <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-60" />
-               <div className="absolute bottom-12 right-12 text-[10px] font-mono text-accent/40 rotate-90 origin-right uppercase tracking-[0.5em]">
+               <div className="absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-black via-transparent to-transparent opacity-60" />
+               <div className="absolute bottom-8 right-8 lg:bottom-12 lg:right-12 text-[8px] md:text-[10px] font-mono text-accent/40 lg:rotate-90 origin-right uppercase tracking-[0.5em]">
                  Island_elite // divine_v4
                </div>
              </div>
