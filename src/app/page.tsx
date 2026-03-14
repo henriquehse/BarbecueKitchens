@@ -90,7 +90,7 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="max-w-5xl md:max-w-6xl"
           >
-            <h2 className="text-[clamp(2rem,9vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12 max-w-[95%] sm:max-w-none">
+            <h2 className="text-[clamp(1.5rem,8vw,7rem)] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12 max-w-[90%] sm:max-w-none px-4 md:px-0 mx-auto md:mx-0">
               Arquitetura <br/> de <span className="text-accent italic">Integração</span>
             </h2>
             <div className="flex flex-col md:flex-row gap-12 items-start md:items-center">
