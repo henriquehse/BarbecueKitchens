@@ -90,8 +90,8 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="max-w-5xl md:max-w-6xl"
           >
-            <h2 className="text-[clamp(1.5rem,8vw,7rem)] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12 max-w-[90%] sm:max-w-none px-4 md:px-0 mx-auto md:mx-0">
-              Arquitetura <br/> de <span className="text-accent italic">Integração</span>
+            <h2 className="text-[clamp(2.5rem,10vw,7rem)] font-syne font-black uppercase tracking-tighter leading-[0.9] md:leading-[0.8] mb-8 md:mb-12 w-full break-words text-left">
+              Arquitetura <span className="block md:inline">de</span> <span className="text-accent italic">Integração</span>
             </h2>
             <div className="flex flex-col md:flex-row gap-12 items-start md:items-center">
               <p className="max-w-md text-neutral/60 font-mono text-[10px] md:text-xs lg:text-sm leading-relaxed border-l border-accent/30 pl-6">
