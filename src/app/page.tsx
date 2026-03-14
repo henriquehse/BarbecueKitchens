@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import Image, { StaticImageData } from 'next/image';
-import { Hammer, Droplets, Flame, ChefHat, Package, ChevronDown, Maximize2, X, MessageCircle } from 'lucide-react';
+import { Hammer, Droplets, Flame, ChefHat, Package, ChevronDown, Maximize2, X, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { BottomDock } from '@/components/BottomDock';
 import { Loader } from '@/components/Loader';
@@ -24,8 +24,14 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedImage, setSelectedImage] = useState<StaticImageData | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [highlightIndex, setHighlightIndex] = useState(0);
   
   const originalImages = useMemo(() => [img103, img100, img104], []);
+  const highlightItems = useMemo(() => [
+    { img: img103, title: "Integração Arquitetônica", desc: "Equilíbrio absoluto entre forma e função" },
+    { img: img100, title: "Núcleo de Preparo", desc: "Saneamento de alta precisão" },
+    { img: img104, title: "Estação Grill", desc: "Performance térmica industrial" }
+  ], []);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -84,7 +90,7 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="max-w-5xl md:max-w-6xl"
           >
-            <h2 className="text-[10vw] sm:text-7xl md:text-8xl lg:text-[7.5vw] xl:text-[7rem] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12">
+            <h2 className="text-[clamp(2.5rem,10vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12">
               Arquitetura <br/> de <span className="text-accent italic">Integração</span>
             </h2>
             <div className="flex flex-col md:flex-row gap-12 items-start md:items-center">
@@ -109,58 +115,100 @@ export default function Home() {
         <motion.div 
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 md:left-12 md:translate-x-0"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
         >
           <ChevronDown className="w-6 h-6 text-accent" />
         </motion.div>
       </section>
 
-      {/* 1.5 HIGH-RES HIGHLIGHTS */}
+      {/* 1.5 HIGH-RES HIGHLIGHT SLIDER */}
       <section className="py-24 bg-background relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 mb-12 flex justify-between items-end">
+        <div className="max-w-7xl mx-auto px-8 mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div>
-            <span className="text-[10px] font-mono text-accent tracking-[0.5em] uppercase block mb-4">Elite_High_Res</span>
-            <h3 className="text-3xl md:text-5xl font-syne font-black uppercase tracking-tighter">Sistemas <span className="text-accent italic">Nucleares</span></h3>
+            <span className="text-[10px] font-mono text-accent tracking-[0.5em] uppercase block mb-4">Elite_Display_v4</span>
+            <h3 className="text-4xl md:text-6xl font-syne font-black uppercase tracking-tighter">Sistemas <span className="text-accent italic">Nucleares</span></h3>
           </div>
-          <div className="hidden md:flex items-center gap-4 text-[10px] font-mono text-neutral/40 uppercase tracking-widest">
-            <span className="w-8 h-px bg-white/10" />
-            Clique para inspecionar em 4K
+          
+          <div className="flex items-center gap-6">
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setHighlightIndex((prev) => (prev - 1 + highlightItems.length) % highlightItems.length)}
+                className="w-12 h-12 border border-white/10 flex items-center justify-center hover:bg-accent hover:text-black transition-all"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={() => setHighlightIndex((prev) => (prev + 1) % highlightItems.length)}
+                className="w-12 h-12 border border-white/10 flex items-center justify-center hover:bg-accent hover:text-black transition-all"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="hidden md:block text-[10px] font-mono text-neutral/40 uppercase tracking-widest">
+              Navegue pelas estações // {highlightIndex + 1}_0{highlightItems.length}
+            </div>
           </div>
         </div>
 
-        <div className="flex gap-8 overflow-x-auto px-8 pb-12 hide-scrollbar snap-x snap-mandatory">
-          {[
-            { img: devSink, title: "Núcleo de Preparo" },
-            { img: imgIslandElite, title: "Ilha de Comando" },
-            { img: imgGrillElite, title: "Estação Grill" }
-          ].map((item, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-              className="min-w-[85vw] md:min-w-[40vw] aspect-[16/10] relative group overflow-hidden border border-white/5 cursor-zoom-in snap-center"
-              onClick={() => setSelectedImage(item.img)}
-            >
-              <Image 
-                src={item.img} 
-                alt={item.title} 
-                fill 
-                className="object-cover transition-all duration-1000 group-hover:scale-110" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 transition-opacity group-hover:opacity-40" />
-              <div className="absolute bottom-8 left-8">
-                <h4 className="text-xl md:text-2xl font-syne font-bold uppercase tracking-tighter text-white">{item.title}</h4>
-                <div className="mt-2 flex items-center gap-3">
-                  <div className="w-6 h-px bg-accent" />
-                  <span className="text-[10px] font-mono text-accent uppercase tracking-widest">Ultra_Res_4K</span>
+        <div className="max-w-7xl mx-auto px-0 md:px-8">
+          <div className="relative aspect-video w-full overflow-hidden border-y md:border border-white/5">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={highlightIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 cursor-zoom-in"
+                onClick={() => setSelectedImage(highlightItems[highlightIndex].img)}
+              >
+                <Image 
+                  src={highlightItems[highlightIndex].img} 
+                  alt={highlightItems[highlightIndex].title} 
+                  fill 
+                  className="object-cover" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                
+                <div className="absolute bottom-8 left-8 md:bottom-16 md:left-16 max-w-xl">
+                  <motion.h4 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    className="text-3xl md:text-6xl font-syne font-black uppercase tracking-tighter text-white"
+                  >
+                    {highlightItems[highlightIndex].title}
+                  </motion.h4>
+                  <motion.p 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-xs md:text-base font-mono text-accent mt-4 uppercase tracking-widest"
+                  >
+                    {highlightItems[highlightIndex].desc}
+                  </motion.p>
                 </div>
-              </div>
-              <div className="absolute top-8 right-8 p-4 bg-black/80 border border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Maximize2 className="w-5 h-5 text-white" />
-              </div>
-            </motion.div>
-          ))}
+
+                <div className="absolute top-8 right-8 p-4 bg-black/80 border border-white/5 hidden md:block">
+                  <Maximize2 className="w-5 h-5 text-white" />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          
+          {/* Mobile Dot Nav */}
+          <div className="flex justify-center gap-3 mt-8 md:hidden">
+            {highlightItems.map((_, i) => (
+              <div 
+                key={i} 
+                className={cn(
+                  "h-1 transition-all duration-500",
+                  i === highlightIndex ? "w-12 bg-accent" : "w-4 bg-white/10"
+                )} 
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -217,13 +265,13 @@ export default function Home() {
               
               <div className="relative group">
                 {/* Layered Text Idea: Background Solid */}
-                <h2 className="text-5xl sm:text-6xl md:text-8xl xl:text-[7.5rem] font-syne font-black uppercase tracking-tighter text-white leading-[0.85] relative z-10">
-                  Protocolo <br /> de <span className="text-accent italic text-4xl sm:text-5xl md:text-7xl xl:text-[6rem] align-top ml-2">Uso</span>
+                <h2 className="text-[clamp(2rem,8.5vw,7.5rem)] font-syne font-black uppercase tracking-tighter text-white leading-[0.85] relative z-10">
+                  Protocolo <br /> de <span className="text-accent italic text-[clamp(1.5rem,7vw,6rem)] align-top ml-2">Uso</span>
                 </h2>
                 
                 {/* Foreground Outline (for overlap feel) */}
-                <h2 className="absolute top-0 left-0 text-5xl sm:text-6xl md:text-8xl xl:text-[7.5rem] font-syne font-black uppercase tracking-tighter leading-[0.85] pointer-events-none z-40 text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)]">
-                  Protocolo <br /> de <span className="italic text-4xl sm:text-5xl md:text-7xl xl:text-[6rem] align-top ml-2">Uso</span>
+                <h2 className="absolute top-0 left-0 text-[clamp(2rem,8.5vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.85] pointer-events-none z-40 text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)]">
+                  Protocolo <br /> de <span className="italic text-[clamp(1.5rem,7vw,6rem)] align-top ml-2">Uso</span>
                 </h2>
               </div>
             </div>
