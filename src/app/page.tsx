@@ -90,7 +90,7 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="max-w-5xl md:max-w-6xl"
           >
-            <h2 className="text-[clamp(2.5rem,10vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12">
+            <h2 className="text-[clamp(2rem,9vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12 max-w-[95%] sm:max-w-none">
               Arquitetura <br/> de <span className="text-accent italic">Integração</span>
             </h2>
             <div className="flex flex-col md:flex-row gap-12 items-start md:items-center">
@@ -265,12 +265,12 @@ export default function Home() {
               
               <div className="relative group">
                 {/* Layered Text Idea: Background Solid */}
-                <h2 className="text-[clamp(2rem,8.5vw,7.5rem)] font-syne font-black uppercase tracking-tighter text-white leading-[0.85] relative z-10">
+                <h2 className="text-[clamp(1.8rem,8vw,7.5rem)] font-syne font-black uppercase tracking-tighter text-white leading-[0.85] relative z-10 max-w-[95%]">
                   Protocolo <br /> de <span className="text-accent italic text-[clamp(1.5rem,7vw,6rem)] align-top ml-2">Uso</span>
                 </h2>
                 
                 {/* Foreground Outline (for overlap feel) */}
-                <h2 className="absolute top-0 left-0 text-[clamp(2rem,8.5vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.85] pointer-events-none z-40 text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)]">
+                <h2 className="absolute top-0 left-0 text-[clamp(1.8rem,8vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.85] pointer-events-none z-40 text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)] max-w-[95%]">
                   Protocolo <br /> de <span className="italic text-[clamp(1.5rem,7vw,6rem)] align-top ml-2">Uso</span>
                 </h2>
               </div>
