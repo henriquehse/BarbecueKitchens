@@ -16,8 +16,8 @@ const config: Config = {
         neutral: "var(--neutral)",
       },
       fontFamily: {
-        syne: ["var(--font-syne)", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        syne: ["var(--font-syne)"],
+        mono: ["var(--font-mono)"],
       },
       backgroundImage: {
         "bunker-grid": "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",

@@ -84,29 +84,31 @@ export default function Home() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 mt-24 md:mt-0">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 mt-32 md:mt-0">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="max-w-5xl md:max-w-6xl"
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-4xl lg:max-w-6xl"
           >
-            <h2 className="text-[clamp(1.25rem,9vw,8rem)] font-syne font-black uppercase tracking-tighter leading-[0.9] md:leading-[0.8] mb-8 md:mb-12 w-full text-left">
-              Arquitetura de <br/> <span className="text-accent italic text-[clamp(1.2rem,8vw,7.5rem)]">Integração</span>
+            <h2 className="text-[clamp(1.5rem,8vw,4.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.95] md:leading-[0.9] w-full text-left">
+              ARQUITETURA<br/>
+              DE<br/>
+              <span className="text-accent italic text-[clamp(1.4rem,7vw,4rem)] block -mt-1">INTEGRAÇÃO</span>
             </h2>
-            <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start md:items-center">
-              <p className="max-w-md text-neutral/60 font-mono text-[9px] md:text-xs lg:text-sm leading-relaxed border-l border-accent/30 pl-6">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start md:items-center mt-8 md:mt-12">
+              <p className="max-w-md text-neutral/60 font-mono text-[9px] md:text-sm leading-relaxed border-l-2 border-accent pl-8 py-2">
                 Protocolo de design industrial fundindo funcionalidade de alta performance com estética minimalista de ambientes de elite.
               </p>
-              <div className="hidden sm:flex gap-4 p-4 md:p-5 bg-secondary/80 backdrop-blur-xl border border-white/5 font-mono text-[8px] md:text-[10px]">
+              <div className="hidden sm:flex gap-6 p-6 bg-secondary/80 backdrop-blur-3xl border border-white/5 font-mono text-[9px] md:text-[11px] shadow-2xl">
                 <div className="flex flex-col">
-                  <span className="text-accent font-bold uppercase">Status</span>
-                  <span>OPTIMIZED_FLOW</span>
+                  <span className="text-accent font-bold uppercase tracking-widest">Status</span>
+                  <span className="text-white/80">OPTIMIZED_FLOW</span>
                 </div>
-                <div className="w-px h-8 bg-white/10" />
+                <div className="w-px h-10 bg-white/10" />
                 <div className="flex flex-col">
-                  <span className="text-accent font-bold uppercase">Mode</span>
-                  <span>DIVINE_V4</span>
+                  <span className="text-accent font-bold uppercase tracking-widest">Mode</span>
+                  <span className="text-white/80">DIVINE_V4</span>
                 </div>
               </div>
             </div>
@@ -349,37 +351,44 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[1000] bg-black flex items-center justify-center cursor-zoom-out touch-none"
+            className="fixed inset-0 z-[1000] bg-black flex items-center justify-center cursor-zoom-out touch-none scroll-lock"
             onClick={() => setSelectedImage(null)}
           >
+            <style jsx global>{`
+              body { overflow: hidden !important; }
+            `}</style>
             <motion.div
               initial={{ scale: 0.98, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.98, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-screen h-screen flex items-center justify-center"
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-screen h-screen flex items-center justify-center overflow-hidden"
             >
               <Image 
                 src={selectedImage} 
                 alt="High Resolution View" 
                 fill
-                className="object-contain"
+                className="object-contain p-0 md:p-4"
                 priority
               />
 
               <button 
-                className="absolute top-4 right-4 z-50 p-3 bg-accent/80 backdrop-blur-md text-black rounded-full hover:scale-110 active:scale-95 transition-all shadow-2xl"
+                className="absolute top-6 right-6 z-50 p-4 bg-accent text-black rounded-full hover:scale-110 active:scale-95 transition-all shadow-2xl"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedImage(null);
                 }}
               >
-                <X className="w-5 h-5 md:w-6 md:h-6" />
+                <X className="w-6 h-6" />
               </button>
 
-              <div className="hidden lg:flex absolute bottom-8 left-8 p-6 font-mono text-[10px] text-accent gap-8 uppercase tracking-widest border border-white/10 bg-black/60 backdrop-blur-md rounded-sm">
-                <span>8K_EXTREME_RES</span>
-                <span>Divine_V4 // HQ_RENDER</span>
+              <div className="hidden lg:flex absolute bottom-12 left-12 p-8 font-mono text-[11px] text-accent gap-12 uppercase tracking-[0.3em] border border-white/10 bg-black/80 backdrop-blur-3xl rounded-sm">
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+                  8K_EXTREME_RES
+                </span>
+                <span>Fidelidade: 100%</span>
+                <span>Protocolo: Divine_V4</span>
               </div>
             </motion.div>
           </motion.div>
