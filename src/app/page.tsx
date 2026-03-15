@@ -39,6 +39,7 @@ export default function Home() {
   });
 
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1.1, 1]);
+  const dockOpacity = useTransform(scrollYProgress, [0.95, 0.99], [1, 0]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -57,8 +58,8 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-background" ref={containerRef}>
       <Loader />
-      <Header />
-      <BottomDock />
+      {!selectedImage && <Header />}
+      {!selectedImage && <BottomDock style={{ opacity: dockOpacity }} />}
 
       {/* 1. HERO SECTION */}
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -83,28 +84,28 @@ export default function Home() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-8">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 mt-24 md:mt-0">
           <motion.div
-            initial={{ opacity: 0, y: 100 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
             className="max-w-5xl md:max-w-6xl"
           >
-            <h2 className="text-[clamp(2rem,8vw,7rem)] font-syne font-black uppercase tracking-tighter leading-[0.9] md:leading-[0.8] mb-8 md:mb-12 w-full text-left">
-              Arquitetura de <br/> <span className="text-accent italic">Integração</span>
+            <h2 className="text-[clamp(1.25rem,9vw,8rem)] font-syne font-black uppercase tracking-tighter leading-[0.9] md:leading-[0.8] mb-8 md:mb-12 w-full text-left">
+              Arquitetura de <br/> <span className="text-accent italic text-[clamp(1.2rem,8vw,7.5rem)]">Integração</span>
             </h2>
-            <div className="flex flex-col md:flex-row gap-12 items-start md:items-center">
-              <p className="max-w-md text-neutral/60 font-mono text-[10px] md:text-xs lg:text-sm leading-relaxed border-l border-accent/30 pl-6">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start md:items-center">
+              <p className="max-w-md text-neutral/60 font-mono text-[9px] md:text-xs lg:text-sm leading-relaxed border-l border-accent/30 pl-6">
                 Protocolo de design industrial fundindo funcionalidade de alta performance com estética minimalista de ambientes de elite.
               </p>
-              <div className="flex gap-4 p-5 bg-secondary/80 backdrop-blur-xl border border-white/5 font-mono text-[10px]">
+              <div className="hidden sm:flex gap-4 p-4 md:p-5 bg-secondary/80 backdrop-blur-xl border border-white/5 font-mono text-[8px] md:text-[10px]">
                 <div className="flex flex-col">
-                  <span className="text-accent font-bold">STATUS</span>
+                  <span className="text-accent font-bold uppercase">Status</span>
                   <span>OPTIMIZED_FLOW</span>
                 </div>
                 <div className="w-px h-8 bg-white/10" />
                 <div className="flex flex-col">
-                  <span className="text-accent font-bold">MODE</span>
+                  <span className="text-accent font-bold uppercase">Mode</span>
                   <span>DIVINE_V4</span>
                 </div>
               </div>
@@ -172,11 +173,11 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                 
-                <div className="absolute bottom-8 left-8 md:bottom-16 md:left-16 max-w-xl">
+                <div className="absolute bottom-20 left-6 md:bottom-16 md:left-16 max-w-xl">
                   <motion.h4 
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    className="text-3xl md:text-6xl font-syne font-black uppercase tracking-tighter text-white"
+                    className="text-2xl md:text-6xl font-syne font-black uppercase tracking-tighter text-white"
                   >
                     {highlightItems[highlightIndex].title}
                   </motion.h4>
@@ -184,7 +185,7 @@ export default function Home() {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="text-xs md:text-base font-mono text-accent mt-4 uppercase tracking-widest"
+                    className="text-[10px] md:text-base font-mono text-accent mt-2 md:mt-4 uppercase tracking-widest"
                   >
                     {highlightItems[highlightIndex].desc}
                   </motion.p>
@@ -198,14 +199,16 @@ export default function Home() {
           </div>
           
           {/* Mobile Dot Nav */}
-          <div className="flex justify-center gap-3 mt-8 md:hidden">
+          <div className="flex justify-center gap-2 mt-8 md:hidden">
             {highlightItems.map((_, i) => (
-              <div 
+              <button 
                 key={i} 
+                onClick={() => setHighlightIndex(i)}
                 className={cn(
-                  "h-1 transition-all duration-500",
-                  i === highlightIndex ? "w-12 bg-accent" : "w-4 bg-white/10"
+                  "h-1 transition-all duration-500 rounded-full",
+                  i === highlightIndex ? "w-8 bg-accent" : "w-1.5 bg-white/10"
                 )} 
+                aria-label={`Ir para slide ${i + 1}`}
               />
             ))}
           </div>
@@ -225,7 +228,7 @@ export default function Home() {
               key={i}
               whileHover={{ y: -10 }} 
               className={cn(
-                "group aspect-video relative overflow-hidden bg-secondary border border-white/5 cursor-zoom-in rounded-sm",
+                "group aspect-[16/10] md:aspect-video relative overflow-hidden bg-secondary border border-white/5 cursor-zoom-in rounded-sm",
                 i % 2 !== 0 && "md:translate-y-12"
               )}
               onClick={() => setSelectedImage(mod.img)}
@@ -264,14 +267,12 @@ export default function Home() {
               </div>
               
               <div className="relative group">
-                {/* Layered Text Idea: Background Solid */}
-                <h2 className="text-[clamp(1.8rem,8vw,7.5rem)] font-syne font-black uppercase tracking-tighter text-white leading-[0.85] relative z-10 max-w-[95%]">
-                  Protocolo <br /> de <span className="text-accent italic text-[clamp(1.5rem,7vw,6rem)] align-top ml-2">Uso</span>
+                <h2 className="text-[clamp(1.25rem,8vw,7.5rem)] font-syne font-black uppercase tracking-tighter text-white leading-[0.9] md:leading-[0.85] relative z-10 max-w-[95%]">
+                  Protocolo <br /> de <span className="text-accent italic text-[clamp(1.2rem,7vw,6rem)] align-top ml-2">Uso</span>
                 </h2>
                 
-                {/* Foreground Outline (for overlap feel) */}
-                <h2 className="absolute top-0 left-0 text-[clamp(1.8rem,8vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.85] pointer-events-none z-40 text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)] max-w-[95%]">
-                  Protocolo <br /> de <span className="italic text-[clamp(1.5rem,7vw,6rem)] align-top ml-2">Uso</span>
+                <h2 className="absolute top-0 left-0 text-[clamp(1.25rem,8vw,7.5rem)] font-syne font-black uppercase tracking-tighter leading-[0.9] md:leading-[0.85] pointer-events-none z-40 text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)] max-w-[95%]">
+                  Protocolo <br /> de <span className="italic text-[clamp(1.2rem,7vw,6rem)] align-top ml-2">Uso</span>
                 </h2>
               </div>
             </div>
@@ -297,18 +298,18 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="pt-8">
+            <div className="pt-8 w-full md:w-auto">
               <motion.a 
                 href="https://wa.me/5511978546562"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 10 }}
-                className="inline-flex items-center gap-6 group"
+                className="inline-flex items-stretch gap-0 md:gap-6 group w-full md:w-auto"
               >
-                <div className="bg-accent text-black px-8 md:px-12 py-4 md:py-6 font-syne font-black uppercase tracking-tighter text-lg md:text-xl">
+                <div className="bg-accent text-black px-6 md:px-12 py-4 md:py-6 font-syne font-black uppercase tracking-tighter text-base md:text-xl flex-1 flex items-center justify-center">
                   Iniciar Projeto
                 </div>
-                <div className="w-12 h-12 md:w-16 md:h-16 border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all duration-500">
+                <div className="w-14 h-14 md:w-20 md:h-20 border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/10 transition-all duration-500 bg-secondary/30">
                   <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-accent" />
                 </div>
               </motion.a>
@@ -348,31 +349,37 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[1000] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+            className="fixed inset-0 z-[1000] bg-black flex items-center justify-center cursor-zoom-out touch-none"
             onClick={() => setSelectedImage(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.98, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full h-full flex items-center justify-center"
+              exit={{ scale: 0.98, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-screen h-screen flex items-center justify-center"
             >
               <Image 
                 src={selectedImage} 
                 alt="High Resolution View" 
-                className="max-w-full max-h-full object-contain shadow-2xl"
+                fill
+                className="object-contain"
                 priority
               />
+
               <button 
-                className="absolute top-0 right-0 p-4 bg-accent text-black rounded-full hover:scale-110 active:scale-95 transition-all"
-                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 z-50 p-3 bg-accent/80 backdrop-blur-md text-black rounded-full hover:scale-110 active:scale-95 transition-all shadow-2xl"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImage(null);
+                }}
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 md:w-6 md:h-6" />
               </button>
-              <div className="absolute bottom-0 left-0 p-6 font-mono text-[10px] text-accent flex flex-col md:flex-row gap-8 uppercase tracking-widest border-l-2 border-accent bg-black/40 backdrop-blur-md">
-                <span>Resolução: 8K_Ultra_HD</span>
-                <span>Fidelidade: 100%</span>
-                <span>Protocolo: Divine_V4</span>
+
+              <div className="hidden lg:flex absolute bottom-8 left-8 p-6 font-mono text-[10px] text-accent gap-8 uppercase tracking-widest border border-white/10 bg-black/60 backdrop-blur-md rounded-sm">
+                <span>8K_EXTREME_RES</span>
+                <span>Divine_V4 // HQ_RENDER</span>
               </div>
             </motion.div>
           </motion.div>

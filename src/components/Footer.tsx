@@ -60,7 +60,7 @@ export function Footer() {
         </motion.div>
       </div>
       
-      <div className="absolute bottom-8 left-8 right-8 flex justify-between items-center text-[10px] font-mono text-neutral/40 uppercase tracking-widest">
+      <div className="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-neutral/40 uppercase tracking-widest text-center md:text-left">
         <span>© 2026 Kitchen Bunker. Todos os direitos reservados.</span>
         <span>By Nexus Architect</span>
       </div>

@@ -1,14 +1,18 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { ChevronUp, MessageSquare } from 'lucide-react';
 
-export function BottomDock() {
+export function BottomDock({ style }: { style?: any }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="fixed bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-1 md:gap-2 p-1.5 md:p-2 bg-secondary/80 backdrop-blur-xl border border-white/5 rounded-full shadow-2xl w-[90%] max-w-max">
+    <motion.div 
+      style={style}
+      className="fixed bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-1 md:gap-2 p-1.5 md:p-2 bg-secondary/80 backdrop-blur-xl border border-white/5 rounded-full shadow-2xl w-[90%] max-w-max"
+    >
       <button
         onClick={scrollToTop}
         className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors group"
@@ -28,6 +32,6 @@ export function BottomDock() {
         <span>Solicitar Projeto</span>
         <MessageSquare className="w-3.5 h-3.5 md:w-4 md:h-4" />
       </a>
-    </div>
+    </motion.div>
   );
 }
